@@ -1,0 +1,697 @@
+﻿@crown_authority_cooldown_years = 20
+@tribal_authority_cooldown_years = 10
+
+crown_authority = {
+	default = crown_authority_1
+	cumulative = yes
+	flag = realm_law
+	
+	crown_authority_0 = {
+		modifier = {
+			direct_vassal_opinion = 10
+			#feudal_government_tax_contribution_mult = -0.1
+			#vassal_levy_contribution_mult = -0.1
+		}
+
+		can_keep = { realm_law_use_crown_authority = yes }
+	}
+	
+	crown_authority_1 = {
+		modifier = {
+			direct_vassal_opinion = -10
+			#feudal_government_tax_contribution_mult = 0.1
+			#vassal_levy_contribution_mult = 0.1
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_partition_succession_laws
+
+		can_keep = { realm_law_use_crown_authority = yes }
+
+		can_pass = {
+			trigger_if = {
+				limit = { has_realm_law = crown_authority_0 }
+				custom_description = {
+					subject = root
+					text = "has_crown_authority_cooldown"
+					NAND = {
+						has_variable = crown_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+			root.culture = { has_innovation = innovation_plenary_assemblies }
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOR = {
+							has_realm_law = crown_authority_2
+							has_realm_law = crown_authority_3
+						}
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = crown_authority_0 }
+				value = 1
+			}
+		}
+	}
+	
+	crown_authority_2 = {
+		modifier = {
+			direct_vassal_opinion = -10
+			feudal_government_tax_contribution_mult = 0.1
+			vassal_levy_contribution_mult = 0.1
+		}
+		flag = vassal_internal_wars_banned
+		flag = vassal_refusal_is_treason
+		flag = can_change_succession_laws
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+		
+		can_keep = { realm_law_use_crown_authority = yes }
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					NOT = { has_realm_law = crown_authority_3 }
+				}
+				has_realm_law = crown_authority_1
+				custom_description = {
+					subject = root
+					text = "has_crown_authority_cooldown"
+					NAND = {
+						has_variable = crown_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+			root.culture = { has_innovation = innovation_royal_prerogative }
+		}
+
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = crown_authority_3 }
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = crown_authority_1 }
+				value = 1
+			}
+		}
+	}
+	
+	crown_authority_3 = {
+		modifier = {
+			direct_vassal_opinion = -20
+			feudal_government_tax_contribution_mult = 0.25
+			vassal_levy_contribution_mult = 0.25
+		}
+		flag = vassal_all_wars_banned
+		flag = can_designate_heirs
+		
+		can_keep = { realm_law_use_crown_authority = yes }
+
+		can_pass = {
+			has_realm_law = crown_authority_2
+			custom_description = {
+				subject = root
+				text = "has_crown_authority_cooldown"
+				NAND = {
+					has_variable = crown_authority_cooldown
+					NOT = {
+						culture = { has_innovation = innovation_all_things }
+					}
+				}
+			}
+			root.culture = { has_innovation = innovation_royal_prerogative }
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = crown_authority_3 }
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+		}
+	}
+}
+
+tribal_authority = {
+	default = tribal_authority_1
+	cumulative = yes
+	flag = realm_law
+	
+	tribal_authority_0 = {
+		modifier = { direct_vassal_opinion = 10 }
+
+		can_keep = { realm_law_use_tribal = yes }
+		#Imprisonment is disabled if you have this law. Script is in the interaction, currently in 00_prison_interactions.
+	}
+	
+	tribal_authority_1 = {
+		modifier = { direct_vassal_opinion = -10 }
+		flag = can_change_succession_laws
+
+		can_keep = { realm_law_use_tribal = yes }
+
+		can_pass = {
+			trigger_if = {
+				limit = { has_realm_law = tribal_authority_0 }
+				custom_description = {
+					subject = root
+					text = "has_tribal_authority_cooldown"
+					NAND = {
+						has_variable = tribal_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOR = {
+							has_realm_law = tribal_authority_2
+							has_realm_law = tribal_authority_3
+						}
+					}
+					add = increase_tribal_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = tribal_authority_cooldown
+				years = @tribal_authority_cooldown_years
+			}
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = tribal_authority_0 }
+				value = 1
+			}
+		}
+	}
+	
+	tribal_authority_2 = {
+		modifier = { direct_vassal_opinion = -10 }
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		
+		can_keep = { realm_law_use_tribal = yes }
+		
+		can_pass = {
+			trigger_if = {
+				limit = {
+					NOT = { has_realm_law = tribal_authority_3 }
+				}
+				has_realm_law = tribal_authority_1
+				custom_description = {
+					subject = root
+					text = "has_tribal_authority_cooldown"
+					NAND = {
+						has_variable = tribal_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+		}
+
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = tribal_authority_3 }
+					}
+					add = increase_tribal_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = tribal_authority_cooldown
+				years = @tribal_authority_cooldown_years
+			}
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = tribal_authority_1 }
+				value = 1
+			}
+		}
+	}
+	
+	tribal_authority_3 = {
+		modifier = { direct_vassal_opinion = -20 }
+		#Settling is disabled unless you have this law. Script is in the decisions, currently in 80_major_decisions.
+		#Reforming pagan religions (but not creating other faiths) is disabled unless you have this law. Script is in the reformation prereqs, currently in 00_rules.
+		
+		can_keep = { realm_law_use_tribal = yes }
+		
+		can_pass = {
+			has_realm_law = tribal_authority_2
+			custom_description = {
+				subject = root
+				text = "has_tribal_authority_cooldown"
+				NAND = {
+						has_variable = tribal_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+			}
+		}
+		
+		pass_cost = { prestige = increase_tribal_authority_prestige_cost }
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = tribal_authority_cooldown
+				years = @tribal_authority_cooldown_years
+			}
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = tribal_authority_2 }
+				value = 1
+			}
+		}
+	}
+}
+
+roman_bureaucratic_laws = {
+	default = bureaucracy_0
+	cumulative = no
+	flag = realm_law
+	
+	bureaucracy_0 = {
+		modifier = {
+			direct_vassal_opinion = -10
+			county_opinion_add = -15
+			vassal_limit = -60
+			title_creation_cost_mult = 0.5
+			build_speed = 0.25
+			build_gold_cost = 0.20
+			holding_build_speed = 0.25
+			holding_build_gold_cost = 0.20
+			development_growth = -1
+			monthly_income_mult = -0.2
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_succession_laws
+		flag = can_change_partition_succession_laws
+		flag = vassal_refusal_is_treason
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+
+		can_keep = { realm_law_use_bureaucracy = yes }
+
+        can_pass = {
+            OR = {
+                has_realm_law = bureaucracy_1
+				has_realm_law = bureaucracy_2
+                has_realm_law = bureaucracy_3
+            }
+        }
+
+		pass_cost = {
+			gold = 1000
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_0 }
+				value = 1
+			}
+		}
+	}
+	
+	bureaucracy_1 = {
+		modifier = {
+			direct_vassal_opinion = -5
+			county_opinion_add = -10
+			vassal_limit = -40
+			title_creation_cost_mult = 0.25
+			build_speed = 0.15
+			build_gold_cost = 0.1
+			holding_build_speed = 0.15
+			holding_build_gold_cost = 0.1
+			development_growth = -0.5
+			monthly_income_mult = -0.1
+		}
+		flag = negotiate_foedus
+		flag = grant_pronoia
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_partition_succession_laws
+		flag = vassal_refusal_is_treason
+		flag = can_change_succession_laws
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+		flag = can_designate_heirs
+
+		can_keep = { realm_law_use_bureaucracy = yes }
+
+        can_pass = {
+            OR = {
+                has_realm_law = bureaucracy_0
+				has_realm_law = bureaucracy_2
+                has_realm_law = bureaucracy_3
+            }
+        }
+
+		pass_cost = {
+			gold = 1500
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_0 }
+				value = 1
+			}
+		}
+	}
+	
+	bureaucracy_2 = {
+		modifier = {
+			direct_vassal_opinion = 0
+			county_opinion_add = -5
+			vassal_limit = -20
+			title_creation_cost_mult = -0.1
+			build_speed = 0.15
+			build_gold_cost = 0.1
+			holding_build_speed = 0.15
+			holding_build_gold_cost = 0.1
+			development_growth = 0.5
+			monthly_income_mult = -0.05
+		}
+		flag = negotiate_foedus
+		flag = grant_pronoia
+		flag = revoke_pronoia
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_partition_succession_laws
+		flag = vassal_internal_wars_banned
+		flag = vassal_refusal_is_treason
+		flag = can_change_succession_laws
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+		flag = can_designate_heirs
+
+		can_keep = { realm_law_use_bureaucracy = yes }
+
+        can_pass = {
+            OR = {
+				has_realm_law = bureaucracy_1
+                has_realm_law = bureaucracy_3
+            }
+        }
+
+		pass_cost = {
+			gold = 2000
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_1 }
+				value = 1
+			}
+		}
+	}
+	
+	bureaucracy_3 = {
+		modifier = {
+			direct_vassal_opinion = 5
+			county_opinion_add = 0
+			vassal_limit = 0
+			development_growth = 1
+			monthly_income_mult = 0.05
+		}
+		flag = negotiate_foedus
+		flag = grant_pronoia
+		flag = revoke_pronoia
+		flag = imperial_regime_change
+		flag = imperial_seize_title
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_partition_succession_laws
+		flag = vassal_internal_wars_banned
+		flag = vassal_refusal_is_treason
+		flag = can_change_succession_laws
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+		flag = vassal_all_wars_banned
+		flag = can_designate_heirs
+
+		can_keep = { realm_law_use_bureaucracy = yes }
+
+		can_pass = {
+			has_realm_law = bureaucracy_2
+		}
+
+		pass_cost = {
+			gold = 2500
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_2 }
+				value = 1
+			}
+		}
+	}
+}
+
+roman_bureaucratic_laws_vassals = {
+	default = bureaucracy_v_0
+	cumulative = no
+	flag = realm_law
+	
+	bureaucracy_v_0 = { #Balanced
+		modifier = {
+			diplomacy = 2
+			stewardship = 2
+			martial = 2
+			domain_tax_mult = 0.2
+			title_creation_cost_mult = 0.40
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_succession_laws
+		flag = can_change_partition_succession_laws
+		flag = vassal_refusal_is_treason
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+
+		can_keep = { realm_law_use_bureaucracy_vassals= yes }
+
+        can_pass = {
+			is_at_war = no
+			any_army = { count = 0 }
+        }
+
+		pass_cost = {
+			gold = 500
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_v_0 }
+				value = 1
+			}
+		}
+	}
+	
+	bureaucracy_v_1 = { #Diplomacy
+		modifier = {
+			diplomacy = 3
+			monthly_income = -0.2 #Paying for diplomatic commoditys
+			domain_tax_mult = -0.15
+			levy_size = -0.15
+			roman_imperial_government_tax_contribution_mult = -0.15
+			vassal_levy_contribution_mult = -0.15
+			mercenary_hire_cost_mult = -0.3 #Negotating Good Deal
+			independent_ruler_opinion = 20
+			direct_vassal_opinion = 15
+			powerful_vassal_opinion = 10
+			fellow_vassal_opinion = 10
+			max_learn_language_schemes_add = 2 #Gotta speak the language
+
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_succession_laws
+		flag = can_change_partition_succession_laws
+		flag = vassal_refusal_is_treason
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+
+		can_keep = { realm_law_use_bureaucracy_vassals = yes }
+
+        can_pass = {
+			is_at_war = no
+			any_army = { count = 0 }
+        }
+
+		pass_cost = {
+			gold = 500
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_v_0 }
+				value = 1
+			}
+		}
+	}
+
+	bureaucracy_v_2 = { #Civil
+		modifier = {
+			stewardship = 3
+			monthly_income = 1
+			roman_imperial_government_tax_contribution_mult = 0.1
+			domain_limit = 2
+			domain_tax_mult = 0.10
+			build_speed = -0.1
+			build_gold_cost = -0.15
+			holding_build_speed = -0.1
+			holding_build_gold_cost = -0.15
+			development_growth = 0.5
+			county_opinion_add = -10
+			direct_vassal_opinion = -30
+			powerful_vassal_opinion = -50
+			vassal_limit = 5
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_succession_laws
+		flag = can_change_partition_succession_laws
+		flag = vassal_refusal_is_treason
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+
+		can_keep = { realm_law_use_bureaucracy_vassals = yes }
+
+        can_pass = {
+			is_at_war = no
+			any_army = { count = 0 }
+        }
+
+		pass_cost = {
+			gold = 500
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_v_1 }
+				value = 1
+			}
+		}
+	}
+
+	bureaucracy_v_3 = { #Military
+		modifier = {
+			martial = 3
+			monthly_income = -0.50
+			men_at_arms_maintenance = -0.25
+			min_combat_roll	= 4
+			men_at_arms_cap = 5
+		    men_at_arms_limit = 5
+			vassal_levy_contribution_mult = -0.50
+			movement_speed = 0.3
+			enemy_hard_casualty_modifier = 0.25
+			hard_casualty_modifier = -0.25
+			levy_size = -0.50
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_change_succession_laws
+		flag = can_change_partition_succession_laws
+		flag = vassal_refusal_is_treason
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+
+		can_keep = { realm_law_use_bureaucracy_vassals = yes }
+
+        can_pass = {
+			is_at_war = no
+			any_army = { count = 0 }
+        }
+
+		pass_cost = {
+			gold = 500
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = bureaucracy_v_2 }
+				value = 1
+			}
+		}
+	}
+}

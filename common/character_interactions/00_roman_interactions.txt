@@ -1,0 +1,414 @@
+﻿roman_claim_title_interaction = {
+	category = interaction_category_roman
+	desc =  roman_claim_title_interaction_desc
+	target_type = title
+	target_filter = recipient_domain_titles
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = { has_realm_law_flag = imperial_seize_title }
+		NOT = { scope:recipient = scope:actor }
+
+		scope:actor = {
+			OR = {
+				has_title = title:e_byzantium
+				has_title = title:e_western_roman_empire
+				has_title = title:e_roman_empire
+			}
+			has_government = roman_imperial_government
+		}
+
+		scope:recipient = {
+			is_landed = yes
+			target_is_liege_or_above = scope:actor
+			has_government = roman_imperial_government
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		NOT = { scope:actor = { is_at_war_with = scope:recipient } }
+		scope:actor = {
+			prestige >= medium_prestige_value
+		}
+		scope:recipient = {
+			is_diplomatically_available = yes
+			NOT = { has_strong_hook = scope:actor }
+		}
+	}
+
+	can_be_picked = {
+		AND =  {
+			NOT = {
+				scope:actor = scope:recipient
+			}
+ 			scope:recipient = {
+				is_vassal_or_below_of = scope:actor
+			}
+		}
+	}
+
+	has_valid_target_showing_failures_only = {
+		scope:target = {
+			is_contested = no
+		}
+	}
+
+	on_auto_accept = {
+		scope:recipient = {
+			trigger_event = roman_interaction.0001
+		}
+	}
+
+	on_accept = {
+		roman_claim_title_effect = yes
+		scope:actor = {
+			hidden_effect = {
+				send_interface_toast = {
+					title = roman_claim_title_interaction_notification
+
+					left_icon = scope:actor
+					right_icon = scope:recipient
+
+					show_as_tooltip = {
+						roman_claim_title_effect = yes
+					}
+				}
+			}
+		}
+	}
+
+	auto_accept = yes
+}
+
+increase_imperial_salary = {
+	category = interaction_category_roman
+	is_shown = {
+		scope:actor = {
+			has_government = roman_imperial_government
+		}
+		scope:recipient = {
+			has_government = roman_imperial_government
+			is_vassal_of = scope:actor
+			NOT = {
+				vassal_contract_obligation_level:imperial_salary = 3
+				vassal_contract_has_flag = has_pronoia_contract
+			}
+		}
+	}
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = roman_increased_salary
+			}
+			if = {
+				limit = {
+					vassal_contract_obligation_level:imperial_salary = 0
+				}
+				vassal_contract_set_obligation_level = {
+					type = imperial_salary level = 1
+				}
+			}
+			else_if = {
+				limit = {
+					vassal_contract_obligation_level:imperial_salary = 1
+				}
+				vassal_contract_set_obligation_level = {
+					type = imperial_salary level = 2
+				}
+			}
+			else = {
+				limit = {
+					vassal_contract_obligation_level:imperial_salary = 2
+				}
+				vassal_contract_set_obligation_level = {
+					type = imperial_salary level = 3
+				}
+			}
+		}
+	}
+}
+
+decrease_imperial_salary = {
+	category = interaction_category_roman
+	is_shown = {
+		scope:actor = {
+			has_government = roman_imperial_government
+		}
+		scope:recipient = {
+			has_government = roman_imperial_government
+			is_vassal_of = scope:actor
+			NOT = {
+				vassal_contract_obligation_level:imperial_salary = 0
+				vassal_contract_has_flag = has_pronoia_contract
+			}
+		}
+	}
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = roman_decreased_salary
+			}
+			if = {
+				limit = {
+					vassal_contract_obligation_level:imperial_salary = 3
+				}
+				vassal_contract_set_obligation_level = {
+					type = imperial_salary level = 2
+				}
+			}
+			else_if = {
+				limit = {
+					vassal_contract_obligation_level:imperial_salary = 2
+				}
+				vassal_contract_set_obligation_level = {
+					type = imperial_salary level = 1
+				}
+			}
+			else_if = {
+				limit = {
+					vassal_contract_obligation_level:imperial_salary = 1
+				}
+				vassal_contract_set_obligation_level = {
+					type = imperial_salary level = 0
+				}
+			}
+		}
+	}
+}
+
+grant_imperial_pronoia = {
+	category = interaction_category_roman
+	is_shown = {
+		AND = {
+			scope:actor = { highest_held_title_tier = tier_empire }
+			scope:actor = { has_government = roman_imperial_government }
+			scope:actor = { has_realm_law_flag = grant_pronoia }
+		}
+		scope:recipient = {
+			has_government = roman_imperial_government
+			is_vassal_of = scope:actor
+			NOT = {
+				vassal_contract_obligation_level:imperial_salary = 0
+				vassal_contract_obligation_level:imperial_salary = 1
+				vassal_contract_obligation_level:imperial_salary = 2
+				vassal_contract_has_flag = has_pronoia_contract
+			}
+		}
+	}
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = roman_grant_imperial_pronoia
+			}
+			vassal_contract_set_obligation_level = { type = imperial_salary level = 4 }
+		}
+	}
+}
+
+revoke_imperial_pronoia = {
+	category = interaction_category_roman
+	is_shown = {
+		AND = {
+			scope:actor = { highest_held_title_tier = tier_empire }
+			scope:actor = { has_government = roman_imperial_government }
+			scope:actor = { has_realm_law_flag = revoke_pronoia }
+		}
+		scope:recipient = {
+			has_government = roman_imperial_government
+			is_vassal_of = scope:actor
+			NOT = {
+				vassal_contract_obligation_level:imperial_salary = 0
+				vassal_contract_obligation_level:imperial_salary = 1
+				vassal_contract_obligation_level:imperial_salary = 2
+				vassal_contract_obligation_level:imperial_salary = 3
+			}
+		}
+	}
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = roman_revoke_imperial_pronoia
+			}
+			vassal_contract_set_obligation_level = { type = imperial_salary level = 0 }
+		}
+	}
+}
+
+regime_change = {
+	category = interaction_category_roman
+	is_shown = {
+		AND = {
+			scope:actor = { has_realm_law_flag = imperial_regime_change }
+			scope:actor = { has_government = roman_imperial_government }
+		}
+		scope:recipient = {
+			is_vassal_of = scope:actor
+			NOR = {
+				has_government = roman_imperial_government
+				has_government = theocracy_government
+				has_government = tribal_government
+			}
+		}
+	}
+	
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = roman_regime_change
+			}
+			change_government = roman_imperial_government
+			trigger_event = {
+				id = roman_fixes.0001
+			}
+			if = {
+				limit = {
+					highest_held_title_tier <= tier_county
+				}
+				trigger_event = {
+					id = contract_fixes.0001
+				}
+			}
+			else_if = {
+				limit = {
+					highest_held_title_tier = tier_duchy
+				}
+				trigger_event = {
+					id = contract_fixes.0002
+				}
+				trigger_event = {
+					id = contract_fixes.0007
+				}
+			}
+			else = {
+				limit = {
+					highest_held_title_tier = tier_kingdom
+				}
+				trigger_event = {
+					id = contract_fixes.0003
+				}
+				trigger_event = {
+					id = contract_fixes.0008
+				}
+			}
+			every_vassal_or_below = {
+				limit = {
+					NOR = {
+						has_government = theocracy_government
+						has_government = tribal_government
+					}
+				}
+				change_government = roman_imperial_government
+				trigger_event = {
+					id = roman_fixes.0001
+				}
+				if = {
+					limit = {
+						highest_held_title_tier <= tier_county
+					}
+					trigger_event = {
+						id = contract_fixes.0001
+					}
+				}
+				else_if = {
+					limit = {
+						highest_held_title_tier = tier_duchy
+					}
+					trigger_event = {
+						id = contract_fixes.0002
+					}
+					trigger_event = {
+						id = contract_fixes.0007
+					}
+				}
+				else = {
+					limit = {
+						highest_held_title_tier = tier_kingdom
+					}
+					trigger_event = {
+						id = contract_fixes.0003
+					}
+					trigger_event = {
+						id = contract_fixes.0008
+					}
+				}
+			}
+		}
+	}
+}
+
+negotiate_foedus = {
+	category = interaction_category_roman
+	is_shown = {
+		AND = {
+			scope:actor = { has_realm_law_flag = negotiate_foedus }
+			scope:actor = { has_government = roman_imperial_government }
+		}
+		scope:recipient = {
+			is_vassal_of = scope:actor
+			NOR = {
+				has_government = roman_imperial_government
+				has_government = theocracy_government
+				has_government = tribal_government
+				has_government = republic_government
+				has_government = foederati_government
+			}
+		}
+	}
+	
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:recipient = {
+			change_government = foederati_government
+			vassal_contract_set_obligation_level = { type = special_contract_foederati level = 1 }
+			every_vassal_or_below = {
+				if = {
+					limit = {
+						primary_title.tier <= tier_kingdom
+						NOR = {
+							has_government = roman_imperial_government
+							has_government = theocracy_government
+							has_government = tribal_government
+							has_government = republic_government
+						}
+					}
+					change_government = foederati_government
+					vassal_contract_set_obligation_level = { type = special_contract_foederati level = 0 }
+				}
+			}
+		}
+	}
+}

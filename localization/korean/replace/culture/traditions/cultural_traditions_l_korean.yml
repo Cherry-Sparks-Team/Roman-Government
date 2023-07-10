@@ -1,0 +1,2 @@
+﻿l_korean:
+ [culture_parameter_children_can_be_born_in_the_purple:2 "#TOOLTIP:GAME_CONCEPT,succession_law Imperial Elective# 잠금해제!. 제국관습이 명시하기를 [ruler|E]에게서 태어난 [children|E]는 [GetTrait('born_in_the_purple').GetName( GetNullCharacter )] [trait|E]을(를) 얻을 수 있습니다. - [line_of_succession|E]에서 우선 적용됩니다."

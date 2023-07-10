@@ -1,0 +1,331 @@
+﻿#negotiate_foedus_contract = {
+#	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+#	desc = negotiate_foedus_desc
+#	selection_tooltip = negotiate_foedus_tooltip
+#	major = yes
+#	ai_check_interval = 120
+#
+#	is_shown = {
+#		is_ruler = yes
+#		is_landed = yes
+#		NOR = {
+#			has_government = roman_imperial_government
+#			has_government = foederati_government
+#		}
+#		OR = {
+#			any_liege_or_above = {
+#				has_title = title:e_byzantium
+#			}
+#			any_liege_or_above = {
+#				has_title = title:e_western_roman_empire
+#			}
+#			any_liege_or_above = {
+#				has_title = title:e_roman_empire
+#			}
+#			AND = {
+#				is_independent_ruler = no
+#				top_liege = {
+#					highest_held_title_tier = tier_empire
+#					has_government = roman_imperial_government
+#				}
+#			}
+#		}
+#	}
+#
+#	is_valid = {
+#		any_liege_or_above = {
+#			has_government = roman_imperial_government
+#		}
+#	}
+#
+#	effect = {
+#		change_government = foederati_government
+#		vassal_contract_set_obligation_level = { type = special_contract_foederati level = 1 }
+#		every_vassal_or_below = {
+#			if = {
+#				limit = {
+#					primary_title.tier <= tier_kingdom
+#				}
+#				change_government = foederati_government
+#				vassal_contract_set_obligation_level = { type = special_contract_foederati level = 0 }
+#			}
+#		}
+#	}
+#
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 90
+#	}
+#	cost = { prestige = { value = 250 } }
+#}
+#
+#adopt_roman_government = {
+#	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+#	desc = adopt_roman_government_desc
+#	selection_tooltip = adopt_roman_government_tooltip
+#	major = yes
+#	ai_check_interval = 120
+#
+#	is_shown = {
+#		is_ruler = yes
+#		is_landed = yes
+#		NOT = {
+#			has_government = roman_imperial_government
+#		}
+#		OR = {
+#			any_liege_or_above = {
+#				has_title = title:e_byzantium
+#			}
+#			any_liege_or_above = {
+#				has_title = title:e_western_roman_empire
+#			}
+#			any_liege_or_above = {
+#				has_title = title:e_roman_empire
+#			}
+#			AND = {
+#				is_independent_ruler = no
+#				top_liege = {
+#					highest_held_title_tier = tier_empire
+#					has_government = roman_imperial_government
+#				}
+#			}
+#		}
+#	}
+#
+#	is_valid = {
+#		any_liege_or_above = {
+#			has_government = roman_imperial_government
+#		}
+#	}
+#
+#	effect = {
+#		change_government = roman_imperial_government
+#		trigger_event = {
+#			id = roman_fixes.0001
+#		}
+#		if = {
+#			limit = {
+#				primary_title.tier <= tier_kingdom
+#				has_government = roman_imperial_government
+#			}
+#			vassal_contract_set_obligation_level = { type = roman_contracts level = 2 }
+#			every_vassal_or_below = {
+#				if = {
+#					limit = {
+#						primary_title.tier <= tier_kingdom
+#					}
+#					change_government = roman_imperial_government
+#					if = {
+#						limit = {
+#							primary_title.tier = tier_duchy
+#							has_government = roman_imperial_government
+#						}
+#						vassal_contract_set_obligation_level = { type = roman_contracts level = 1 }
+#					}
+#					if = {
+#						limit = {
+#							primary_title.tier <= tier_county
+#							has_government = roman_imperial_government
+#						}
+#						vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+#					}
+#					trigger_event = {
+#						id = roman_fixes.0001
+#					}
+#				}
+#			}
+#		}
+#		if = {
+#			limit = {
+#				primary_title.tier <= tier_duchy
+#				has_government = roman_imperial_government
+#			}
+#			vassal_contract_set_obligation_level = { type = roman_contracts level = 1 }
+#			every_vassal_or_below = {
+#				if = {
+#					limit = {
+#						primary_title.tier <= tier_kingdom
+#					}
+#					change_government = roman_imperial_government
+#					if = {
+#						limit = {
+#							primary_title.tier <= tier_county
+#							has_government = roman_imperial_government
+#						}
+#						vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+#					}
+#					trigger_event = {
+#						id = roman_fixes.0001
+#					}
+#				}
+#			}
+#		}
+#		if = {
+#			limit = {
+#				primary_title.tier <= tier_county
+#				has_government = roman_imperial_government
+#			}
+#			vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+#			every_vassal_or_below = {
+#				if = {
+#					limit = {
+#						primary_title.tier <= tier_kingdom
+#					}
+#					change_government = roman_imperial_government
+#					if = {
+#						limit = {
+#							primary_title.tier <= tier_county
+#							has_government = roman_imperial_government
+#						}
+#						vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+#					}
+#					trigger_event = {
+#						id = roman_fixes.0001
+#					}
+#				}
+#			}
+#		}
+#	}
+#
+#	ai_potential = {
+#		always = yes
+#	}
+#
+#	ai_will_do = {
+#		base = 90
+#	}
+#	cost = { gold = { value = 50 } prestige = { value = 200 } }
+#}
+
+adopt_roman_government = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	desc = adopt_roman_government_desc
+	selection_tooltip = adopt_roman_government_tooltip
+	major = yes
+	ai_check_interval = 120
+
+	is_shown = {
+		is_ai = no
+		NOT = {
+			has_government = roman_imperial_government
+		}
+		OR = {
+			any_liege_or_above = {
+				has_title = title:e_byzantium
+			}
+			any_liege_or_above = {
+				has_title = title:e_western_roman_empire
+			}
+			any_liege_or_above = {
+				has_title = title:e_roman_empire
+			}
+		}
+	}
+
+	is_valid = {
+		any_liege_or_above = {
+			has_government = roman_imperial_government
+		}
+	}
+
+	effect = {
+		change_government = roman_imperial_government
+		trigger_event = {
+			id = roman_fixes.0001
+		}
+		if = {
+			limit = {
+				primary_title.tier <= tier_kingdom
+				has_government = roman_imperial_government
+			}
+			vassal_contract_set_obligation_level = { type = roman_contracts level = 2 }
+			every_vassal_or_below = {
+				if = {
+					limit = {
+						primary_title.tier <= tier_kingdom
+					}
+					change_government = roman_imperial_government
+					if = {
+						limit = {
+							primary_title.tier = tier_duchy
+							has_government = roman_imperial_government
+						}
+						vassal_contract_set_obligation_level = { type = roman_contracts level = 1 }
+					}
+					if = {
+						limit = {
+							primary_title.tier <= tier_county
+							has_government = roman_imperial_government
+						}
+						vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+					}
+					trigger_event = {
+						id = roman_fixes.0001
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				primary_title.tier <= tier_duchy
+				has_government = roman_imperial_government
+			}
+			vassal_contract_set_obligation_level = { type = roman_contracts level = 1 }
+			every_vassal_or_below = {
+				if = {
+					limit = {
+						primary_title.tier <= tier_kingdom
+					}
+					change_government = roman_imperial_government
+					if = {
+						limit = {
+							primary_title.tier <= tier_county
+							has_government = roman_imperial_government
+						}
+						vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+					}
+					trigger_event = {
+						id = roman_fixes.0001
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				primary_title.tier <= tier_county
+				has_government = roman_imperial_government
+			}
+			vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+			every_vassal_or_below = {
+				if = {
+					limit = {
+						primary_title.tier <= tier_kingdom
+					}
+					change_government = roman_imperial_government
+					if = {
+						limit = {
+							primary_title.tier <= tier_county
+							has_government = roman_imperial_government
+						}
+						vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+					}
+					trigger_event = {
+						id = roman_fixes.0001
+					}
+				}
+			}
+		}
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 90
+	}
+	cost = { gold = { value = 50 } prestige = { value = 200 } }
+}

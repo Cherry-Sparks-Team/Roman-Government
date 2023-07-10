@@ -1,0 +1,14 @@
+﻿l_english:
+
+ #Decisions
+ adopt_roman_government:0 "Adopt Roman Bureaucratic Ways"
+ adopt_roman_government_desc:0 "After our integration into the Roman Empires, it's time to turn the future of my realm and dynasty and adopt their Bureaucratic ways."
+ adopt_roman_government_tooltip:0 "You adopt the Roman Bureaucratic ways"
+ adopt_roman_government_confirm:0 "It's time"
+ any_liege_or_above:0 "[realm|E]"
+
+ #Foederati
+ negotiate_foedus_contract:0 "Establish Foedus"
+ negotiate_foedus_desc:0 "Provide military aid in exchange for being allowed to settle on Roman territory."
+ negotiate_foedus_tooltip:0 "Establish Foederati Contract"
+ negotiate_foedus_contract_confirm:0 "It's time"

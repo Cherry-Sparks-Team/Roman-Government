@@ -1,0 +1,30 @@
+﻿title_succession_laws = {
+	#Byzantine Imperial Succession
+	imperial_elective_succession_law = {
+		can_have = {
+			has_government = roman_imperial_government
+			highest_held_title_tier = tier_empire
+		}
+		can_pass = {
+			can_change_title_law_trigger = yes
+			culture = { has_cultural_tradition = tradition_byzantine_succession }
+		}
+		can_title_have = {
+            can_title_have_law_general_trigger = yes
+        }
+		succession = {
+			order_of_succession = election
+			election_type = imperial_elective
+		}
+		flag = elective_succession_law
+		title_allegiance_opinion = 10
+		modifier = {
+			vassal_limit = 20
+		}
+		revoke_cost = {
+			prestige = change_hre_title_succession_law_prestige_cost
+		}
+		pass_cost = {
+			prestige = change_title_succession_law_prestige_cost
+		}
+	}

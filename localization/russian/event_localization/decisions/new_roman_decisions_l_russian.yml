@@ -1,0 +1,14 @@
+﻿l_english:
+
+ #Decisions
+ adopt_roman_government:0 "Перенять Римские бюрократические порядки"
+ adopt_roman_government_desc:0 "После нашей интеграции в Римскую империю пришло время изменить будущее моей державы и династии и перенять их бюрократические методы."
+ adopt_roman_government_tooltip:0 "Вы перенимаете римские бюрократические порядки"
+ adopt_roman_government_confirm:0 "Пришло время"
+ any_liege_or_above:0 "[realm|E]"
+
+ #Foederati
+ negotiate_foedus_contract:0 "Установить Фоедус"
+ negotiate_foedus_desc:0 "Оказывать военную помощь в обмен на разрешение поселиться на римской территории."
+ negotiate_foedus_tooltip:0 "Заключить контракт федерата"
+ negotiate_foedus_contract_confirm:0 "Пришло время"

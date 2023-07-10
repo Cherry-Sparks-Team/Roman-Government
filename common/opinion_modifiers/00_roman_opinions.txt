@@ -1,0 +1,39 @@
+﻿roman_seized_domain = {
+	opinion = -30
+	years = 10
+	decaying = yes
+
+	stacking = yes
+}
+roman_increased_salary = {
+	opinion = 10
+    decaying = yes
+	years = 1
+	
+	stacking = yes
+	max = 25
+}
+
+roman_decreased_salary = {
+	opinion = -10
+    decaying = yes
+	monthly_change = 1
+
+	stacking = yes
+	max = -50
+}
+roman_grant_imperial_pronoia = {
+	opinion = 25
+    decaying = yes
+	monthly_change = 1
+}
+roman_revoke_imperial_pronoia = {
+	opinion = -50
+    decaying = yes
+	monthly_change = 1
+}
+roman_regime_change = {
+	opinion = -50
+	years = 10
+	decaying = yes
+}

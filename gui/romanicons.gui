@@ -1,0 +1,19 @@
+texticon = {
+	icon = romangov_icon
+	iconsize = {
+		texture = "gfx/interface/icons/romangov.dds"
+		size = { 30 30 }
+		offset = { 0 8 }
+		fontsize = 16
+	}
+}
+
+texticon = {
+	icon = foederati_icon
+	iconsize = {
+		texture = "gfx/interface/icons/foederati.dds"
+		size = { 30 30 }
+		offset = { 0 8 }
+		fontsize = 16
+	}
+}

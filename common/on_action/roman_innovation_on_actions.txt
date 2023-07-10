@@ -1,0 +1,16 @@
+﻿on_game_start_after_lobby = {
+	on_actions = {
+		greek_roman_innovation_effect
+	}
+}
+
+greek_roman_innovation_effect = {
+	effect = {
+		culture:roman = { add_innovation = innovation_plenary_assemblies }
+		culture:roman = { add_innovation = innovation_royal_prerogative }
+		culture:greek = { add_innovation = innovation_royal_prerogative }
+		culture:roman = { add_innovation = innovation_primogeniture }
+		culture:greek = { add_innovation = innovation_primogeniture }
+		culture:roman = { add_innovation = innovation_legionnaires }
+	}
+}

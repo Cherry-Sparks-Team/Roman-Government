@@ -1,0 +1,88 @@
+﻿roman_imperial_government = {
+	create_cadet_branches = yes
+	rulers_should_have_dynasty = yes
+	dynasty_named_realms = no
+	royal_court = yes
+	can_get_government = {
+		OR = {
+			top_liege = { has_title = title:e_byzantium }
+			top_liege = { has_title = title:e_western_roman_empire }
+			top_liege = { has_title = title:e_roman_empire }
+			has_title = title:e_byzantium
+			has_title = title:e_western_roman_empire
+			has_title = title:e_roman_empire
+		}
+	}
+	primary_holding = castle_holding
+	valid_holdings = { city_holding cow_metropolis_holding }
+	required_county_holdings = { castle_holding city_holding church_holding }
+	
+	character_modifier = {
+		development_growth_factor = 0.25 #Centralisation of state resources contracts take development away to simulate resources going all the way up.
+		men_at_arms_maintenance = -0.40
+		men_at_arms_cap = 1
+		men_at_arms_limit = 3
+		vassal_limit = 40
+		monthly_income_mult = -0.2 #Simulate cost of running the imperial_government
+		levy_size = -0.5 #Simulate the men being used for proper armies rather than levies
+	}
+	
+	vassal_contract = {
+		roman_contracts
+		imperial_salary
+		special_contract_foederati
+		religious_rights
+		fortification_rights
+		coinage_rights
+		succession_rights
+		war_declaration_rights
+		council_rights
+	}
+	
+	color = hsv{ 0.95 0.96 1.00 }
+}
+
+foederati_government = {
+	create_cadet_branches = yes
+	rulers_should_have_dynasty = yes
+	dynasty_named_realms = no
+	royal_court = yes
+
+	fallback = 1
+
+	primary_holding = castle_holding
+	required_county_holdings = { castle_holding city_holding church_holding }
+	valid_holdings = { city_holding cow_metropolis_holding }
+	
+	can_get_government = { 
+		AND = {
+			liege = {
+				has_government = roman_imperial_government
+			}
+		}
+	}
+
+	character_modifier = {
+		tax = 0.5
+		levies = 0.5
+		garrison_size = 0.2
+		controlled_province_advantage = 5
+	}
+
+	vassal_contract = {
+		special_contract_foederati
+		foederati_government_taxes
+		foederati_government_levies
+		special_contract
+		religious_rights
+		jizya_special_rights
+		fortification_rights
+		coinage_rights
+		succession_rights
+		war_declaration_rights
+		council_rights
+		title_revocation_rights
+	}
+	
+	color = hsv{ 1 0.85 0.58 }
+}

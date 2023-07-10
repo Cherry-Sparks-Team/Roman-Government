@@ -1,0 +1,7 @@
+﻿roman_imperial_government = {
+	parent = government
+}
+
+roman_contracts = {
+	parent = feudal_contract
+}

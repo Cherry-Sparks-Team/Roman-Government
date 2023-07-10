@@ -1,0 +1,67 @@
+﻿on_title_gain = {
+    on_actions = {
+        delay = { days = 1 }
+        on_title_gain_fix
+    }
+	events = {
+		contract_fixes.0001
+		contract_fixes.0002
+		contract_fixes.0003
+		contract_fixes.0004
+		contract_fixes.0005
+		roman_fixes.0001
+	}
+}
+
+on_title_lost = {
+	on_actions = {
+        delay = { days = 1 }
+        on_title_gain_fix
+    }
+	events = {
+		contract_fixes.0001
+		contract_fixes.0002
+		contract_fixes.0003
+		contract_fixes.0004
+		contract_fixes.0005
+		roman_fixes.0001
+	}
+}
+
+on_character_culture_change = {
+	on_actions = {
+        delay = { days = 1 }
+        on_title_gain_fix
+    }
+	events = {
+		contract_fixes.0001
+		contract_fixes.0002
+		contract_fixes.0003
+		contract_fixes.0004
+		contract_fixes.0005
+		roman_fixes.0001
+	}
+}
+
+on_title_gain_fix = {
+    events = {
+		contract_fixes.0001
+		contract_fixes.0002
+		contract_fixes.0003
+		contract_fixes.0004
+		contract_fixes.0005
+		roman_fixes.0001
+    }
+}
+
+on_vassal_gained = {
+    events = {
+		contract_fixes.0001
+		contract_fixes.0002
+		contract_fixes.0003
+		contract_fixes.0004
+		contract_fixes.0005
+		contract_fixes.0006
+		roman_fixes.0001
+    }
+}

@@ -1,0 +1,2 @@
+﻿l_english:
+ culture_parameter_children_can_be_born_in_the_purple:2 "Разблокирует #TOOLTIP:GAME_CONCEPT,succession_law Имперские выборы#!. [children|E] рождённые от [ruler|E] державы с Имперскими выборами могут получить [GetTrait('born_in_the_purple').GetName( GetNullCharacter )] [trait|E] - Имеющие приоритет в [line_of_succession|E]"

@@ -1,0 +1,14 @@
+﻿l_korean:
+ 
+ #결정
+ Adopt_roman_government:0 "제국 관료제 채택"
+ Adopt_roman_government_desc:0 "제국에 통합된 우리는 고귀하고 월등한 관료제도를 채택할 때입니다."
+ accept_roman_government_tooltip:0 "당신은 제국 관료제를 채택했습니다"
+ Adopt_roman_government_confirm:0 "시간이 되었습니다"
+ any_liege_or_above:0 "[realm|E]"
+ 
+ #페데라티
+ Negotiate_foedus_contract:0 "포에두스 설립"
+ Negotus_foedus_desc:0 "제국 영토에 정착하는 대가로 군사 지원을 제공하십시오."
+ Negotiate_foedus_tooltip:0 "포에데라티 계약 체결"
+ Negotiate_foedus_contract_confirm:0 "시간이 되었습니다"

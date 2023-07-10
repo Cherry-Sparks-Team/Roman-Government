@@ -1,0 +1,98 @@
+﻿namespace = contract_fixes
+
+#roman_contracts_praetura = { #1
+#roman_contracts_theme = { #2
+#roman_contracts_exarchate = { #3
+
+contract_fixes.0001 = { #Fix Contract County Level
+	hidden = yes
+	trigger = {
+		AND = {
+			highest_held_title_tier = tier_county
+			has_government = roman_imperial_government
+		}
+	}
+	
+	immediate = { #Fix Contract
+		vassal_contract_set_obligation_level = { type = roman_contracts level = 0 }
+	}
+}
+
+contract_fixes.0002 = { #Fix Contract Duchy Level
+	hidden = yes
+	trigger = {
+		AND = {
+			highest_held_title_tier = tier_duchy
+			has_government = roman_imperial_government
+			NOT = {culture = culture:roman}
+		}
+	}
+	
+	immediate = { #Fix Contract
+		vassal_contract_set_obligation_level = { type = roman_contracts level = 1 } #Theme
+	}
+}
+
+contract_fixes.0003 = { #Fix Contract Kingdom Level
+	hidden = yes
+	trigger = {
+		AND = {
+			highest_held_title_tier = tier_kingdom
+			has_government = roman_imperial_government
+			NOT = {culture = culture:roman}
+		}
+	}
+	
+	immediate = { #Fix Contract
+		vassal_contract_set_obligation_level = { type = roman_contracts level = 2 } #Exarchate
+	}
+}
+
+contract_fixes.0004 = { #Fix Contract duchy romans
+	hidden = yes
+	trigger = {
+		AND = {
+			highest_held_title_tier = tier_duchy
+			has_government = roman_imperial_government
+			has_culture = culture:roman
+		}
+	}
+	
+	immediate = {
+		vassal_contract_set_obligation_level = { type = roman_contracts level = 3 } #Praeses
+	}
+}
+
+contract_fixes.0005 = { #Fix Contract kingdom romans
+	hidden = yes
+	trigger = {
+		AND = {
+			highest_held_title_tier = tier_kingdom
+			has_government = roman_imperial_government
+			has_culture = culture:roman
+		}
+	}
+	
+	immediate = {
+		vassal_contract_set_obligation_level = { type = roman_contracts level = 4 } #Diocese
+	}
+}
+
+contract_fixes.0006 = { #test
+	hidden = yes
+	trigger = {
+		has_government = foederati_government
+	}
+	
+	immediate = {
+		every_vassal_or_below = {
+			if = {
+				limit = { has_government = feudal_government }
+				change_government = foederati_government
+				vassal_contract_set_obligation_level = { type = special_contract_foederati level = 0 }
+			}
+		}
+	}
+}
+
+########################test
