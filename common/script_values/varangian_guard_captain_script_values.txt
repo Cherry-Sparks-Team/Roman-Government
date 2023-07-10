@@ -1,0 +1,148 @@
+﻿#Co-Emperor Court Position Values
+#This could use balancing in future patches and updates so very WIP.
+
+varangian_captain_court_position_opinion = 50
+varangian_captain_court_position_prestige_salary = 2.0
+
+varangian_captain_court_position_aptitude_value = {
+	value = 1
+	add = {
+		value = martial
+		multiply = 1.25
+		max = 55
+		desc = court_position_skill_martial
+	}
+	add = {
+		value = prowess
+		multiply = 0.75
+		max = 25
+		desc = court_position_skill_prowess
+	}
+	if = {
+		limit = {
+			has_trait = physique_good_3
+		}
+		add = {
+			value = 75
+			desc = court_position_physique_good_3_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = physique_good_2
+		}
+		add = {
+			value = 50
+			desc = court_position_physique_good_2_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = physique_good_1
+		}
+		add = {
+			value = 25
+			desc = court_position_physique_good_1_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = strong
+		}
+		add = {
+			value = 50
+			desc = court_position_strong_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = berserker
+		}
+		add = {
+			value = 30
+			desc = court_position_berserker_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = viking
+		}
+		add = {
+			value = 30
+			desc = court_position_berserker_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = strategist
+		}
+		add = {
+			value = 10
+			desc = court_position_strategist_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = brave
+		}
+		add = {
+			value = 5
+			desc = court_position_brave_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = diligent
+		}
+		add = {
+			value = 5
+			desc = court_position_diligent_trait
+		}
+	}
+	# Start of bad
+	if = {
+		limit = {
+			has_trait = physique_bad_3
+		}
+		add = {
+			value = -75
+			desc = court_position_physique_bad_3_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = physique_bad_2
+		}
+		add = {
+			value = -50
+			desc = court_position_physique_bad_2_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = physique_bad_1
+		}
+		add = {
+			value = -25
+			desc = court_position_physique_bad_1_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = weak
+		}
+		add = {
+			value = -50
+			desc = court_position_weak_trait
+		}
+	}
+	if = {
+		limit = {
+			has_trait = craven
+		}
+		add = {
+			value = -10
+			desc = court_position_craven_trait
+		}
+	}
+}

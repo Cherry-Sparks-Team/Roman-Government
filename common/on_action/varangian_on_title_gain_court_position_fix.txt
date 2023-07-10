@@ -1,0 +1,26 @@
+﻿on_title_gain = {
+	on_actions = {
+		varangian_guard_court_position_fix
+	}
+	events = {
+		varangian_fix.0001
+	}
+}
+
+varangian_guard_court_position_fix = {
+	effect = {
+		if = {
+			limit = {
+				is_independent_ruler = no
+				exists = title:d_varangian_guard
+				liege = {
+					employed_varangian_captain_court_position = no
+				}
+				scope:title = title:d_varangian_guard
+			}
+			liege = {
+				appoint_court_position = { recipient = title:d_varangian_guard.holder court_position = varangian_captain_court_position }
+			}
+		}
+	}
+}

@@ -1,0 +1,3 @@
+﻿can_have_varangian_mercenary_succession_law_trigger = {
+	has_government = varangian_mercenary_government
+}

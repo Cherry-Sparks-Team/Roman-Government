@@ -1,0 +1,8 @@
+d_varangian_guard = { 
+	pattern = "pattern_solid.dds"
+		color1 = "purple"
+	textured_emblem = {
+		texture = "varangian_guard.dds"	
+		instance = { position = { 0.5 0.5 } scale = { 1 1 } }		
+	}
+}

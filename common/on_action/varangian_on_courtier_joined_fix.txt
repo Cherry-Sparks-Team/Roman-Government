@@ -1,0 +1,49 @@
+﻿on_join_court = {
+    on_actions = {
+    }
+}
+
+varangian_guard_court_position_fix = {
+	effect = {
+		if = {
+			limit = {
+				is_independent_ruler = no
+				exists = title:d_varangian_guard
+				liege = {
+					employed_varangian_captain_court_position = no
+				}
+				scope:title = title:d_varangian_guard
+			}
+			liege = {
+				appoint_court_position = { recipient = title:d_varangian_guard.holder court_position = varangian_captain_court_position }
+			}
+		}
+	}
+}
+
+varangian_guard_court_position_no_trait_fix = {
+	effect = {
+		if = {
+			limit = {
+				is_independent_ruler = no
+				exists = title:d_varangian_guard
+				liege = {
+					employed_varangian_captain_court_position = no
+				}
+				scope:title = title:d_varangian_guard
+			}
+			liege = {
+				appoint_court_position = { recipient = title:d_varangian_guard.holder court_position = varangian_captain_court_position }
+			}
+		}
+	}
+}
+
+title:d_varangian_guard.holder = {
+	AND = {
+		has_culture = culture:norse
+		NOT = {
+			has_trait = varangian
+		}
+	}
+}

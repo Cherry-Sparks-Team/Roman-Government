@@ -1,0 +1,11 @@
+﻿d_varangian_guard = {
+	color =  hsv{ 0.9 1 0.3 } #hsv{ 0.73 0.8 0.4 }  #hsv{ 0.77 0.8 0.6 } #{ 143 12 125 }
+	color2 = { 255 255 255 }
+	definite_form = yes
+	landless = yes
+
+	capital = c_byzantion # Constantinople
+
+	de_jure_drift_disabled = yes
+	no_automatic_claims = yes
+}
