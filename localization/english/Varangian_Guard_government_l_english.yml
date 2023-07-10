@@ -1,0 +1,18 @@
+﻿l_english:
+ varangian_mercenary_government:0 "Varangian Guard"
+ varangian_mercenary_government_realm:0 "Varangian Guard"
+ varangian_mercenary_government_desc:0 "An elite unit of the Eastern Roman Army. The members served as personal bodyguards to the emperors and could be counted upon to suppress revolts by disloyal factions"
+ varangian_mercenary_government_adjective:0 "Varangian Guard"
+ varangian_mercenary_government_vassals_label:0 "An elite unit of personal bodyguards to the emperor"
+ varangian_succession_order_laws:0 "[succession_laws|E]"
+ varangian_succession_order_laws_singular:0 "[succession_laws|E]"
+ varangian_mercenary_company_succession_law:0 "Varangian Succession"
+ varangian_mercenary_company_succession_law_effects:0 "Upon succession all of the Captain's [titles|e] will be given to their successor, who is generally the [knight|E] with the highest [martial|E] skill."
+
+ forge_the_varangian_guard_decision:0 "Establish the Varangian Guard"
+ forge_the_varangian_guard_decision_confirm:0 "Found Varangian Guard"
+ forge_the_varangian_guard_decision_desc:0 "An elite unit of the Eastern Roman Army. The members served as personal bodyguards to the emperors and could be counted upon to suppress revolts by disloyal factions"
+ forge_the_varangian_guard_decision_tooltip:0 "An elite unit of the Eastern Roman Army. The members served as personal bodyguards to the emperors and could be counted upon to suppress revolts by disloyal factions"
+
+ varangian_guard:0 "Varangian Guard"
+ varangian_guard_flavor:0 "#F Equipped with Dane axes and heavy mail hauberks, the elite Varangian Guard are a formidable foe in any engagement.#!"

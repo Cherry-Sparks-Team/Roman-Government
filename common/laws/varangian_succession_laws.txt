@@ -1,0 +1,19 @@
+﻿varangian_succession_order_laws = {
+	flag = succession_order_laws
+
+	varangian_mercenary_company_succession_law = {
+		can_keep = {
+			can_have_varangian_mercenary_succession_law_trigger = yes
+		}
+		can_have = {
+			can_have_varangian_mercenary_succession_law_trigger = yes
+		}
+		should_start_with = {
+			has_government = varangian_mercenary_government
+		}
+		succession = {
+			order_of_succession = company
+			pool_character_config = pool_varangian_succession
+		}
+	}
+}

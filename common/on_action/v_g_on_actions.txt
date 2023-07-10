@@ -1,0 +1,38 @@
+﻿on_game_start = {
+	on_actions = {
+		vg_start
+	}
+}
+
+vg_start = {
+	effect = {
+		#for Ui reasons
+		set_global_variable = {
+			name = vg_title
+			value = title:d_varangian_guard
+		}
+	}
+}
+
+on_gurad_raise = {
+	effect = {
+		random_character_war = {
+			save_temporary_scope_as = temp_war
+		}
+		spawn_army = {
+			name = VARANGIAN_GUARD_TITLE
+			men_at_arms = {
+				type = varangian_guard
+				stacks = 8
+			}
+			men_at_arms = {
+				type = onager
+				stacks = 1
+			}
+			
+			war = scope:temp_war
+			inheritable = no
+			location = capital_province
+		}
+	}
+}

@@ -1,0 +1,18 @@
+﻿# Mercenary will always get this
+varangian_mercenary_government = {
+	court_generate_spouses = no
+	court_generate_commanders = 5
+	council = no
+
+	fallback = 3
+
+	ai = {
+		arrange_marriage = no
+		use_goals = no
+		use_scripted_guis = no
+		perform_religious_reformation = no
+	}
+
+
+	color = hsv{ 0.00 0.00 0.66 }
+}

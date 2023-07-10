@@ -1,0 +1,3 @@
+﻿employed_varangian_captain_court_position = {
+	employs_court_position = varangian_captain_court_position
+}

@@ -1,0 +1,77 @@
+﻿vg_visible = { #used for button in HUD
+	scope = character 
+
+	is_valid = {
+		employed_varangian_captain_court_position = yes
+	}
+
+	effect = {
+	
+	}	 			
+}
+vg_button_enabled = {
+	scope = character 
+
+	is_valid = {
+		AND = {
+			is_at_war = yes
+			employed_varangian_captain_court_position = yes
+			NOT = {
+				has_variable = guard_available
+			}
+			gold >= 100
+		}
+	}
+
+	effect = {
+	
+	}	
+}
+raise_guard = { 
+	scope = character 
+
+	effect = {
+		remove_short_term_gold = 100
+		if = {
+			limit = {
+				NOT = {
+					any_character_war = {
+						title:d_varangian_guard.holder = {
+							is_attacker_in_war = PREV
+						}
+					}
+				}
+				NOT = {
+					any_character_war = {
+						title:d_varangian_guard.holder = {
+							is_defender_in_war = PREV
+						}
+					}
+				}
+			}
+			trigger_event = {
+				on_action = on_gurad_raise
+			}
+			set_variable = {
+				name = guard_available
+				value = 50
+				years = 5
+			}
+
+			every_character_war = {
+				if = {
+					limit = {
+						PREV = { is_attacker_in_war = PREV }
+					}
+					add_attacker = title:d_varangian_guard.holder
+				}
+				if = {
+					limit = {
+						PREV = { is_defender_in_war = PREV }
+					}
+					add_defender = title:d_varangian_guard.holder
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+﻿namespace = varangian_fix
+
+varangian_fix.0001 = {
+	hidden = yes
+    trigger = {
+		title:d_varangian_guard.holder = {
+			AND = {
+				has_culture = culture:norse
+				NOT = {
+					has_trait = varangian
+				}
+			}
+		}
+    }
+	
+	immediate = {
+		add_trait = varangian
+	}
+}
